@@ -21,6 +21,8 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductDatatableController;
 use App\Http\Controllers\CustomAuthController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\RSSFeedController;
 
 
@@ -32,7 +34,7 @@ Route::get('/', function () {
 });
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');
 
 
 
@@ -45,7 +47,7 @@ Route::get('/base', function () {
 
 
 // use resource route
-Route::resource('products', ProductController::class);
+// Route::resource('products', ProductController::class);
 
 
 
@@ -95,4 +97,17 @@ Route::middleware(['auth', 'is-active'])->group(function () {
     Route::get('category/teblet',[CategoryController::class,'teblet'])->name('teblet');
     
     
+});
+
+
+
+// use roles and permissions
+  
+
+  
+Route::group(['middleware' => ['auth']], function() {
+    Route::get('/house', [HomeController::class, 'index'])->name('home');
+Route::resource('roles', RoleController::class);
+Route::resource('users', UserController::class);
+Route::resource('products', ProductController::class);
 });

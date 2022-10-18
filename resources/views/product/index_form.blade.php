@@ -9,10 +9,12 @@
                         <div class="pull-left">
                             <h2>Curd</h2>
                         </div>
-                        <div class="intro-y col-span-12 flex flex-wrap sm:flex-no-wrap items-center mt-2"><a
+                        <div class="intro-y col-span-12 flex flex-wrap sm:flex-no-wrap items-center mt-2">
+                            @can('product-create')
+                            <a
                                 class="button text-white bg-theme-1 shadow-md mr-2" href="{{ route('products.create') }}">
                                 Create New
-                                Product</a>
+                                Product</a> @endcan
                         </div>
                     </div>
                 </div>
@@ -39,11 +41,16 @@
                             <td class="text-center whitespace-no-wrap">{{ $product->category_id }}</td>
                             <td class="table-report__action w-56">
                                 <form action="{{ route('products.destroy', $product->id ) }}" class="flex justify-center items-center" method="POST">
-                                    <a class="flex items-center mr-3" href="{{ route('products.show', $product->id) }}"><i data-feather="check-square" class="w-4 h-4 mr-1"></i>Show</a>
-                                    <a class="flex items-center mr-3" href="{{ route('products.edit', $product->id) }}"><i data-feather="check-square" class="w-4 h-4 mr-1"></i>Edit</a>
+                                    <a class=" btn btn-primary flex items-center mr-3" href="{{ route('products.show', $product->id) }}"><i data-feather="check-square" class="w-4 h-4 mr-1"></i>Show</a>
+                                   
+                                    <a class="btn btn-success flex items-center mr-3" href="{{ route('products.edit', $product->id) }}"><i data-feather="check-square" class="w-4 h-4 mr-1"></i>Edit</a>
+                     
+
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="flex items-center text-theme-6"><i data-feather="trash-2" class="w-4 h-4 mr-1"></i>Delete</button>
+                                   
+                                    <button type="submit" class="btn btn-danger flex items-center text-theme-6"><i data-feather="trash-2" class="w-4 h-4 mr-1 "></i>Delete</button>
+                                   
                                 </form>
                             </td>
                         </tr>
